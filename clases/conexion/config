@@ -1,0 +1,9 @@
+{
+    "conexion":{
+        "server" : "localhost",
+        "user" : "root",
+        "password" : "",
+        "database" : "api_citas",
+        "port" : "3306"
+    }
+}
