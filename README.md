@@ -5,6 +5,7 @@ Luego de crear el usuario se hace el login donde se crea el token, el cual se ut
 Esta API Restful recibe y devuelve datos de pacientes en formato json, para el DELETE tambien se puede mandar directamente a travez de headers
 En clases/conexion/config esta la configuracion de la db, en assets/database/database.sql se encuentran las tablas para la db de la API
 La imagen del paciente debe ser en formato codigo base 64.
+En el archivo clases/token.class junto con actualizar token estan creados para usar CRON y inactivar tokens dependiendo de la preferencia del usuario
 
 ## Auth - login
 

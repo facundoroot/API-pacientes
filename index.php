@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API - Prubebas</title>
+    <title>API - Pacientes</title>
     <link rel="stylesheet" href="assets/css/estilo.css" type="text/css">
 </head>
 <body>
 <div  class="container">
     <h1>Api Pacientes</h1>
-    <h2>para generar el token hay que hacer el login, el token se utiliza luego para las acciones del CRUD Esta API Restful recibe y devuelve datos de pacientes en formato json En clases/conexion/config esta la configuracion de la db, en assets/database/database.sql se encuentran las tablas para la db de la API</h2>
+    <p>Para generar el token hay que hacer el login, el token se utiliza luego para las acciones del CRUD.
+    <br> Esta API Restful recibe y devuelve datos de pacientes en formato json.
+    <br> En clases/conexion/config esta la configuracion de la db, en assets/database/database.sql se encuentran las tablas para la db de la API</p>
+    <p>En el archivo clases/token.class junto con actualizar token estan creados para usar CRON y inactivar tokens dependiendo de la preferencia del usuario
+    <br>Las imagenes deben ser en formato codigo base 64</p>
     <div class="divbody">
         <h3>Auth - login</h3>
         <code>
