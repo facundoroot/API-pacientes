@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $listaPacientes = $_paciente->listaPacientes($pagina);
 
         header("Content-type:application/json");
-        echo json_encode($listaPacientes);
+        print_r(json_encode($listaPacientes)); 
         http_response_code(200);
 
     }elseif(isset($_GET['id'])){
@@ -83,8 +83,22 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 }elseif($_SERVER['REQUEST_METHOD'] == 'DELETE'){
     // metodo DELETE (DELETE)
 
-    // recibo datos
-    $postBody = file_get_contents("php://input");
+    // voy a recibir y los datos por header, y si no los envian por ahi los recibo por body como siempre
+    $headers = getallheaders();
+    if(isset($headers['token']) && isset($headers['pacienteid'])){
+        // recibo los datos por headers
+        $send = [
+            "token" => $headers['token'],
+            "pacienteid" => $headers['pacienteid']
+
+        ];
+        // ahora los convierto a json
+        $postBody = json_encode($send);
+
+    }else{
+        // // recibo datos en el body
+         $postBody = file_get_contents("php://input");
+    }
 
     // envio datos al controlador
     $datosArray = $_paciente->delete($postBody);

@@ -1,73 +1,77 @@
-    #Api Pacientes
+# Api restful Pacientes
 
+Para comenzar a utilizar la api se crea un usuario en la base de datos o se usa alguno precreado (password = 123456)
+Luego de crear el usuario se hace el login donde se crea el token, el cual se utiliza para poder hacer peticiones de todos los metodos del CRUD
+Esta API Restful recibe y devuelve datos de pacientes en formato json, para el DELETE tambien se puede mandar directamente a travez de headers
+En clases/conexion/config esta la configuracion de la db, en assets/database/database.sql se encuentran las tablas para la db de la API
+La imagen del paciente debe ser en formato codigo base 64.
 
-        ##Auth - login
+## Auth - login
 
-           ###POST  /auth
+### POST /auth
 
-           {
-               "usuario" :"",  -> REQUERIDO
+{
+"usuario" :"", -> REQUERIDO
 
-               "password": "" -> REQUERIDO
-            }
+"password": "" -> REQUERIDO
+}
 
+## Pacientes
 
+### GET /pacientes?page=$numeroPagina
 
-        ##Pacientes
+### GET /pacientes?id=$idPaciente
 
-           ###GET  /pacientes?page=$numeroPagina
+### POST /pacientes
 
-           ###GET  /pacientes?id=$idPaciente
+{
+"nombre" : "", -> REQUERIDO
 
+"dni" : "", -> REQUERIDO
 
-           ###POST  /pacientes
+"correo":"", -> REQUERIDO
 
-           {
-               "nombre" : "",  -> REQUERIDO
+"codigoPostal" :"",
 
-               "dni" : "",     -> REQUERIDO
+"genero" : "",
 
-               "correo":"",    -> REQUERIDO
+"telefono" : "",
 
-               "codigoPostal" :"",
+"fechaNacimiento" : "",
 
-               "genero" : "",
+"imagen" : "",
 
-               "telefono" : "",
+"token" : "" -> REQUERIDO
+}
 
-               "fechaNacimiento" : "",
+### PUT /pacientes
 
-               "token" : ""    -> REQUERIDO
-           }
+recomendacion:rellenar todos los datos para modificar una fila ya que los datos no rellenos se vuelven null.
 
+{
+"nombre" : "",
 
-           ###PUT  /pacientes
+"dni" : "",
 
-           {
-               "nombre" : "",
+"correo":"",
 
-               "dni" : "",
+"codigoPostal" :"",
 
-               "correo":"",
+"genero" : "",
 
-               "codigoPostal" :"",
+"telefono" : "",
 
-               "genero" : "",
+"fechaNacimiento" : "",
 
-               "telefono" : "",
+"token" : "" , -> REQUERIDO
 
-               "fechaNacimiento" : "",
+"pacienteid" : "" -> REQUERIDO
+}
 
-               "token" : "" ,      -> REQUERIDO
+### DELETE /pacientes
 
-               "pacienteId" : ""   -> REQUERIDO
-           }
+{
+"token" : "", -> REQUERIDO
 
-
-           ###DELETE  /pacientes
-
-           {
-               "token" : "",       -> REQUERIDO
-
-               "pacienteId" : ""   -> REQUERIDO
-           }
+"pacienteid" : "" -> REQUERIDO
+}

@@ -53,7 +53,8 @@ CREATE TABLE `pacientes` (
   `Telefono` varchar(45) DEFAULT NULL,
   `Genero` varchar(45) DEFAULT NULL,
   `FechaNacimiento` date DEFAULT NULL,
-  `Correo` varchar(45) DEFAULT NULL
+  `Correo` varchar(45) DEFAULT NULL,
+  `Imagen` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

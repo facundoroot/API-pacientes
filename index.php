@@ -9,6 +9,7 @@
 <body>
 <div  class="container">
     <h1>Api Pacientes</h1>
+    <h2>para generar el token hay que hacer el login, el token se utiliza luego para las acciones del CRUD Esta API Restful recibe y devuelve datos de pacientes en formato json En clases/conexion/config esta la configuracion de la db, en assets/database/database.sql se encuentran las tablas para la db de la API</h2>
     <div class="divbody">
         <h3>Auth - login</h3>
         <code>
@@ -49,7 +50,9 @@
                "telefono" : "",       
                <br>       
                "fechaNacimiento" : "",      
-               <br>         
+               <br>
+                "imagen" : "",      
+               <br>          
                "token" : ""                 -> REQUERIDO        
                <br>       
            }
@@ -75,7 +78,7 @@
                <br>         
                "token" : "" ,                -> REQUERIDO        
                <br>       
-               "pacienteId" : ""   -> REQUERIDO
+               "pacienteid" : ""   -> REQUERIDO
                <br>
            }
         </code>
@@ -86,7 +89,7 @@
                <br>    
                "token" : "",                -> REQUERIDO        
                <br>       
-               "pacienteId" : ""   -> REQUERIDO
+               "pacienteid" : ""   -> REQUERIDO
                <br>
            }
         </code>

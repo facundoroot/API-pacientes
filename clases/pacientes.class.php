@@ -15,6 +15,7 @@ class Paciente extends Conexion{
     private $fechaNacimiento = '0000-00-00';
     private $correo = '';
     private $token = '';
+    private $imagen = '';
 
 
     public function listaPacientes($pagina = 1){
@@ -67,6 +68,11 @@ class Paciente extends Conexion{
                     if(isset($datos['genero'])){$this->genero = $datos['genero'];}
                     if(isset($datos['fechaNacimiento'])){$this->fechaNacimiento = $datos['fechaNacimiento'];}
 
+                    if(isset($datos['imagen'])){
+                        $resp = $this->procesarImagen($datos['imagen']);
+                        $this->imagen = $resp;
+                    }
+
                     $insertar = $this->insertarPaciente();
 
                     if($insertar){
@@ -90,10 +96,36 @@ class Paciente extends Conexion{
 
     }
 
+    private function procesarImagen($img){
+        $direccion = dirname(__DIR__) . "\public\imagenes\\";
+        // transformo en un array a la variable imagen, dividiendo en antes y despues de ;base64; a los 2 partes del array
+        // la parte [0] del array nos da info de el formato de imagen y la [1] el resto del codigo
+        $partes = explode(";base64,",$img);
+        // ahora divido la imagen que nos llega pero esta vez en la parte de / y agarramos la segunda parte del array o sea [1] y pedimos que nos devuelva el mime type
+        // en lugar de agarrar todo el choclo dentro de [1] solo agarrar el .png o .jpg
+        $extension = explode('/',mime_content_type($img))[1];
+        // ahora hago un decode a la parte de la info de la imagen o sea el $PARTES[1]
+        // en vez de $partes[1] uso sizeof que me devuelve el ultimo elemento del array o sea [1], pero con $partes 1 devuelve un warning
+        $imagen_base64 = base64_decode($partes[1]);
+
+        // creo el path del archivo a crear
+        $file = $direccion . uniqid() . "." . $extension;
+
+        // guardo el archivo
+        file_put_contents($file,$imagen_base64);
+
+        // ahora hago una nueva direccion que voy a usar para guardar la direccion del archivo en la db donde reemplazo \ por / asi queda bien la direccion en la db
+        // si no hago esto no aparece ningun tipo de barra en el path cuando la guardo en la tabla pacientes
+        // solo es una barra en str pero uso 2 por que sino muestra error
+        $nuevaDireccion = str_replace('\\','/',$file);
+
+        return $nuevaDireccion;
+    }
+
     private function insertarPaciente(){
-        $query = "INSERT INTO " . $this->table . " (DNI,Nombre,Direccion,CodigoPostal,Telefono,Genero,FechaNacimiento,Correo)
+        $query = "INSERT INTO " . $this->table . " (DNI,Nombre,Direccion,CodigoPostal,Telefono,Genero,FechaNacimiento,Correo,Imagen)
         values
-        ('" . $this->dni . "','" . $this->nombre . "','" . $this->direccion ."','" . $this->codigoPostal . "','"  . $this->telefono . "','" . $this->genero . "','" . $this->fechaNacimiento . "','" . $this->correo . "')";
+        ('" . $this->dni . "','" . $this->nombre . "','" . $this->direccion ."','" . $this->codigoPostal . "','"  . $this->telefono . "','" . $this->genero . "','" . $this->fechaNacimiento . "','" . $this->correo . "','" . $this->imagen . "')";
 
         $insertar = parent::nonQueryId($query);
 
